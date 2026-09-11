@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Munfli 🖤</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --pink: #ff8fb8;
+    --soft-pink: #ffd6e5;
+    --white: #fff;
+    --dark: #09070a;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,143,184,.18), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255,205,225,.12), transparent 30%),
+        linear-gradient(135deg, #08070a, #170d13, #09070a);
+}
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -5;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background:
+        radial-gradient(circle, rgba(255,143,184,.09) 0 2px, transparent 3px);
+    background-size: 55px 55px;
+    animation: moveStars 25s linear infinite;
+}
+
+@keyframes moveStars {
+    from {
+        transform: translate(0,0) rotate(0deg);
+    }
+    to {
+        transform: translate(100px,100px) rotate(5deg);
+    }
+}
+
+/* Glow blobs */
+
+.glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .22;
+    animation: blob 9s ease-in-out infinite alternate;
+}
+
+.glow.one {
+    background: #ff6f9f;
+    top: -100px;
+    left: -80px;
+}
+
+.glow.two {
+    background: #b76cff;
+    right: -100px;
+    bottom: -80px;
+    animation-delay: 2s;
+}
+
+.glow.three {
+    background: #ffb8d2;
+    left: 40%;
+    top: 40%;
+    width: 180px;
+    height: 180px;
+    opacity: .12;
+    animation-delay: 4s;
+}
+
+@keyframes blob {
+    from {
+        transform: translate(0,0) scale(1);
+    }
+    to {
+        transform: translate(80px,-40px) scale(1.25);
+    }
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 20px;
+    opacity: 0;
+    pointer-events: none;
+    animation: floatHeart linear infinite;
+    z-index: -1;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(.7);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .7;
+    }
+
+    50% {
+        transform: translateY(-50vh) translateX(40px) rotate(15deg) scale(1);
+        opacity: .65;
+    }
+
+    100% {
+        transform: translateY(-115vh) translateX(-40px) rotate(-15deg) scale(.5);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   PASSWORD SCREEN
+========================= */
+
+#lockScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.lock-card {
+    width: min(430px, 100%);
+    padding: 42px 30px;
+    text-align: center;
+
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 30px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.45),
+        inset 0 1px rgba(255,255,255,.08);
+
+    animation: cardIn 1s ease;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.lock-heart {
+    font-size: 52px;
+    margin-bottom: 18px;
+    animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(1.15);
+    }
+    30% {
+        transform: scale(1);
+    }
+}
+
+.lock-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.lock-card p {
+    color: #d7ccd1;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.password-box {
+    display: flex;
+    gap: 10px;
+}
+
+.password-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.07);
+    color: white;
+    outline: none;
+
+    font-size: 15px;
+}
+
+.password-box input:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 20px rgba(255,143,184,.15);
+}
+
+.unlock {
+    border: none;
+    border-radius: 15px;
+    padding: 0 20px;
+
+    background: linear-gradient(135deg,#ff8fb8,#d96894);
+    color: white;
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.unlock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,105,160,.25);
+}
+
+.error {
+    color: #ff9bbd;
+    font-size: 13px;
+    margin-top: 15px;
+    min-height: 18px;
+}
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#mainContent {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 18px 70px;
+}
+
+.container {
+    width: min(720px, 100%);
+    margin: auto;
+}
+
+/* top label */
+
+.top-label {
+    text-align: center;
+    color: #ffb7ce;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeDown 1s ease;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 10vw, 72px);
+    line-height: 1;
+    font-weight: 500;
+    font-style: italic;
+
+    background: linear-gradient(
+        120deg,
+        white,
+        #ffd4e3,
+        #ff8fb8,
+        white
+    );
+
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 250% center;
+    }
+}
+
+.hero .sub {
+    margin-top: 18px;
+    color: #d9cdd2;
+    font-size: 15px;
+}
+
+/* =========================
+   GLASS CARDS
+========================= */
+
+.card {
+    background: rgba(255,255,255,.065);
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 28px;
+    padding: 30px;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.06);
+
+    margin-bottom: 22px;
+
+    animation: fadeUp .8s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.card:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.card:nth-child(4) {
+    animation-delay: .45s;
+}
+
+/* =========================
+   APOLOGY
+========================= */
+
+.apology {
+    text-align: center;
+}
+
+.apology .emoji {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.apology h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.apology p {
+    color: #d9ced3;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+.nickname {
+    margin-top: 25px;
+
+    display: inline-block;
+    padding: 10px 18px;
+
+    border-radius: 100px;
+    border: 1px solid rgba(255,143,184,.25);
+
+    background: rgba(255,143,184,.08);
+    color: #ffc6da;
+
+    font-size: 13px;
+
+    animation: nicknameGlow 3s ease-in-out infinite;
+}
+
+@keyframes nicknameGlow {
+    50% {
+        box-shadow: 0 0 30px rgba(255,143,184,.12);
+    }
+}
+
+/* =========================
+   SONG
+========================= */
+
+.song-card {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.music-icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,143,184,.25),
+        rgba(255,255,255,.06)
+    );
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    font-size: 30px;
+
+    animation: musicFloat 3s ease-in-out infinite;
+}
+
+@keyframes musicFloat {
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+.song-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+}
+
+.song-card p {
+    color: #bdb0b6;
+    font-size: 13px;
+    margin: 8px 0 20px;
+}
+
+.play-btn {
+    border: none;
+    padding: 15px 28px;
+
+    border-radius: 100px;
+
+    background: linear-gradient(135deg,#ff9abc,#d96693);
+    color: white;
+
+    font-weight: 700;
+    font-size: 15px;
+
+    cursor: pointer;
+
+    box-shadow: 0 12px 35px rgba(255,105,160,.2);
+
+    transition: .3s;
+}
+
+.play-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 16px 40px rgba(255,105,160,.3);
+}
+
+.play-btn.playing {
+    background: linear-gradient(135deg,#b86cff,#ff7cae);
+}
+
+.progress-area {
+    margin-top: 22px;
+    display: none;
+}
+
+.progress-bar {
+    height: 5px;
+    width: 100%;
+
+    border-radius: 10px;
+    background: rgba(255,255,255,.1);
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(90deg,#ff8fb8,#fff);
+    transition: width .2s linear;
+}
+
+.time {
+    display: flex;
+    justify-content: space-between;
+    color: #8f8389;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+/* =========================
+   NICKNAME CLOUD
+========================= */
+
+.nicknames {
+    text-align: center;
+}
+
+.nicknames h2 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tag {
+    padding: 9px 15px;
+    border-radius: 100px;
+
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.1);
+
+    color: #eadfe3;
+    font-size: 13px;
+
+    animation: tagFloat 4s ease-in-out infinite;
+}
+
+.tag:nth-child(2) {
+    animation-delay: .5s;
+}
+
+.tag:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.tag:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+@keyframes tagFloat {
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final {
+    text-align: center;
+}
+
+.final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 31px;
+    margin-bottom: 10px;
+}
+
+.final p {
+    color: #c8bbc1;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 100px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.yes {
+    background: linear-gradient(135deg,#ff91b9,#dc638f);
+    color: white;
+}
+
+.no {
+    background: rgba(255,255,255,.07);
+    color: #ddd;
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.final-message {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+
+    border-radius: 20px;
+    background: rgba(255,143,184,.08);
+    border: 1px solid rgba(255,143,184,.15);
+
+    color: #ffd3e1;
+    line-height: 1.7;
+
+    animation: fadeUp .6s ease;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    margin-top: 35px;
+    color: #746970;
+    font-size: 11px;
+}
+
+footer span {
+    color: #ff9abb;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .lock-card {
+        padding: 35px 20px;
+    }
+
+    .password-box {
+        flex-direction: column;
+    }
+
+    .unlock {
+        height: 48px;
+    }
+
+    .card {
+        padding: 25px 20px;
+        border-radius: 23px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .apology p {
+        font-size: 14px;
+    }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+</div>
+
+<!-- FLOATING HEARTS -->
+<div class="heart" style="left:5%; animation-duration:9s; animation-delay:0s;">♡</div>
+<div class="heart" style="left:15%; animation-duration:12s; animation-delay:2s;">♥</div>
+<div class="heart" style="left:27%; animation-duration:10s; animation-delay:4s;">♡</div>
+<div class="heart" style="left:39%; animation-duration:14s; animation-delay:1s;">♥</div>
+<div class="heart" style="left:51%; animation-duration:11s; animation-delay:5s;">♡</div>
+<div class="heart" style="left:63%; animation-duration:13s; animation-delay:3s;">♥</div>
+<div class="heart" style="left:75%; animation-duration:10s; animation-delay:6s;">♡</div>
+<div class="heart" style="left:87%; animation-duration:15s; animation-delay:2s;">♥</div>
+<div class="heart" style="left:95%; animation-duration:11s; animation-delay:7s;">♡</div>
+
+
+<!-- =========================
+     PASSWORD SCREEN
+========================= -->
+
+<section id="lockScreen">
+
+    <div class="lock-card">
+
+        <div class="lock-heart">🔐</div>
+
+        <h1>Ek chhoti si secret place...</h1>
+
+        <p>
+            Is website ko open karne ke liye<br>
+            ek password chahiye 👀
+        </p>
+
+        <div class="password-box">
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password..."
+                autocomplete="off"
+            >
+
+            <button class="unlock" onclick="unlock()">
+                Open ♡
+            </button>
+
+        </div>
+
+        <div class="error" id="error"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main id="mainContent">
+
+<div class="container">
+
+    <div class="top-label">
+        A little something for you ♡
+    </div>
+
+    <section class="hero">
+
+        <h1>Hey, Munfli.</h1>
+
+        <p class="sub">
+            Okay... pehle meri baat sun lena 🥺
+        </p>
+
+    </section>
+
+
+    <!-- APOLOGY -->
+
+    <section class="card apology">
+
+        <div class="emoji">
+            🥺
+        </div>
+
+        <h2>
+            I am genuinely sorry.
+        </h2>
+
+        <p>
+            Haan haan... galti meri thi. 😭<br><br>
+
+            Maine tumhe ignore kar diya,
+            aur honestly mujhe aisa nahi karna chahiye tha.
+            Mere paas koi fancy excuse nahi hai.
+            Bas itna kehna hai ki
+            <b>I'm really sorry.</b>
+            🖤
+            <br><br>
+
+            Aur haan...
+            please itna gussa bhi mat karo
+            meri <b>Munfli</b>. 🥲
+        </p>
+
+        <div class="nickname">
+            Jalpari • Rasmalai • Pagli • Munfli
+        </div>
+
+    </section>
+
+
+    <!-- SONG -->
+
+    <section class="card song-card">
+
+        <div class="music-icon">
+            🎧
+        </div>
+
+        <h2>
+            I made something for you.
+        </h2>
+
+        <p>
+            Is baar sorry sirf words mein nahi...<br>
+            apni awaaz mein bolne ki koshish ki hai.
+        </p>
+
+        <button
+            class="play-btn"
+            id="playButton"
+            onclick="toggleMusic()"
+        >
+            ▶ Play My Song
+        </button>
+
+        <audio id="song">
+            <source src="Munfli.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="progress-area" id="progressArea">
+
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+
+            <div class="time">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NICKNAMES -->
+
+    <section class="card nicknames">
+
+        <h2>
+            Because apparently...
+        </h2>
+
+        <div class="tags">
+
+            <div class="tag">Munfli 🥜</div>
+
+            <div class="tag">Jalpari 🧜‍♀️</div>
+
+            <div class="tag">Rasmalai 🍮</div>
+
+            <div class="tag">Pagli 🤦‍♂️</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section class="card final">
+
+        <h2>
+            Ab ek last question... 🥺
+        </h2>
+
+        <p>
+            Kya meri Pagli ka gussa thoda sa kam hua?
+        </p>
+
+        <div class="buttons">
+
+            <button
+                class="btn yes"
+                onclick="forgive()"
+            >
+                Haan, maaf kiya 🥹
+            </button>
+
+            <button
+                class="btn no"
+                onclick="stillAngry()"
+                id="noButton"
+            >
+                Abhi bhi gussa hoon 😤
+            </button>
+
+        </div>
+
+        <div
+            class="final-message"
+            id="finalMessage"
+        ></div>
+
+    </section>
+
+
+    <footer>
+        Made with a little regret, a little madness & lots of sincerity
+        <span>♡</span>
+    </footer>
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================
+   PASSWORD
+   M OR m = UNLOCK
+========================= */
+
+function unlock() {
+
+    const input = document.getElementById("password");
+    const error = document.getElementById("error");
+    const lock = document.getElementById("lockScreen");
+    const main = document.getElementById("mainContent");
+
+    const password = input.value.trim();
+
+    if (
+        password.length > 0 &&
+        (password[0] === "M" || password[0] === "m")
+    ) {
+
+        lock.style.opacity = "0";
+        lock.style.transform = "scale(1.05)";
+
+        setTimeout(() => {
+
+            lock.style.display = "none";
+            main.style.display = "block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }, 700);
+
+    } else {
+
+        error.textContent =
+            "Hint: password ka first letter M hona chahiye 👀";
+
+        input.style.animation = "shake .4s";
+
+        setTimeout(() => {
+            input.style.animation = "";
+        }, 400);
+    }
+}
+
+
+/* ENTER KEY */
+
+document
+.getElementById("password")
+.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+        unlock();
+    }
+
+});
+
+
+/* =========================
+   MUSIC PLAYER
+========================= */
+
+const song = document.getElementById("song");
+const playButton = document.getElementById("playButton");
+const progressArea = document.getElementById("progressArea");
+const progress = document.getElementById("progress");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
+
+
+function toggleMusic() {
+
+    if (song.paused) {
+
+        song.play();
+
+        playButton.innerHTML =
+            "❚❚ Pause My Song";
+
+        playButton.classList.add("playing");
+
+        progressArea.style.display = "block";
+
+    } else {
+
+        song.pause();
+
+        playButton.innerHTML =
+            "▶ Play My Song";
+
+        playButton.classList.remove("playing");
+    }
+}
+
+
+/* MUSIC PROGRESS */
+
+song.addEventListener("loadedmetadata", function() {
+
+    duration.textContent =
+        formatTime(song.duration);
+
+});
+
+
+song.addEventListener("timeupdate", function() {
+
+    if (!song.duration) return;
+
+    const percent =
+        (song.currentTime / song.duration) * 100;
+
+    progress.style.width =
+        percent + "%";
+
+    currentTime.textContent =
+        formatTime(song.currentTime);
+
+});
+
+
+song.addEventListener("ended", function() {
+
+    playButton.innerHTML =
+        "↻ Play Again";
+
+    playButton.classList.remove("playing");
+
+    progress.style.width = "0%";
+
+});
+
+
+function formatTime(seconds) {
+
+    if (isNaN(seconds)) return "0:00";
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        Math.floor(seconds % 60);
+
+    return minutes + ":" +
+        (secs < 10 ? "0" : "") +
+        secs;
+}
+
+
+/* =========================
+   FINAL BUTTON
+========================= */
+
+function forgive() {
+
+    const message =
+        document.getElementById("finalMessage");
+
+    message.style.display = "block";
+
+    message.innerHTML =
+        "YAYYY 😭🖤<br><br>" +
+        "Thank you, meri Munfli. " +
+        "Ab please dobara mujhe ignore karne ka chance mat dena. 😂<br><br>" +
+        "You are officially forgiven for being angry. 🫠♡";
+
+    createHearts(20);
+}
+
+
+let angryClicks = 0;
+
+function stillAngry() {
+
+    angryClicks++;
+
+    const message =
+        document.getElementById("finalMessage");
+
+    const button =
+        document.getElementById("noButton");
+
+    if (angryClicks === 1) {
+
+        message.style.display = "block";
+
+        message.innerHTML =
+            "Accha ji... abhi bhi gussa? 😭<br>" +
+            "Theek hai, main wait karta hoon. 🥲";
+
+        button.innerHTML =
+            "Still angry 😤";
+
+    }
+
+    else if (angryClicks === 2) {
+
+        message.innerHTML =
+            "Munfli pleaseee 😭<br>" +
+            "Maine song bhi banaya hai yaar...";
+
+        button.innerHTML =
+            "Hmm... maybe 🥺";
+
+    }
+
+    else {
+
+        message.innerHTML =
+            "Okay okay 😭<br>" +
+            "No pressure. Bas itna yaad rakhna — " +
+            "sorry genuinely tha. 🖤";
+
+        button.style.transform =
+            "scale(.85)";
+    }
+
+}
+
+
+/* =========================
+   HEART BURST
+========================= */
+
+function createHearts(amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const heart =
+            document.createElement("div");
+
+        heart.innerHTML =
+            ["♡","♥","✨","💗"][Math.floor(Math.random() * 4)];
+
+        heart.style.position = "fixed";
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.bottom =
+            "-30px";
+
+        heart.style.fontSize =
+            (14 + Math.random() * 25) + "px";
+
+        heart.style.zIndex = "999";
+
+        heart.style.pointerEvents = "none";
+
+        document.body.appendChild(heart);
+
+        const animation =
+            heart.animate(
+
+                [
+                    {
+                        transform:
+                            "translateY(0) scale(.5) rotate(0deg)",
+                        opacity: 0
+                    },
+
+                    {
+                        opacity: 1
+                    },
+
+                    {
+                        transform:
+                            `translateY(-${window.innerHeight + 100}px)
+                             translateX(${(Math.random()-.5)*180}px)
+                             scale(1.2)
+                             rotate(${Math.random()*360}deg)`,
+                        opacity: 0
+                    }
+                ],
+
+                {
+                    duration:
+                        2500 + Math.random() * 1800,
+
+                    easing:
+                        "cubic-bezier(.2,.8,.3,1)"
+                }
+            );
+
+        animation.onfinish = () => {
+            heart.remove();
+        };
+    }
+}
+
+
+/* =========================
+   LITTLE SHAKE ANIMATION
+========================= */
+
+const style =
+document.createElement("style");
+
+style.innerHTML = `
+
+@keyframes shake {
+
+    0%,100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-7px);
+    }
+
+    50% {
+        transform: translateX(7px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+`;
+
+document.head.appendChild(style);
+
+</script>
+
+</body>
+</html>
